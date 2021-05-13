@@ -23,6 +23,8 @@
 		DD862F632649960E00A316D3 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F622649960E00A316D3 /* Styling.swift */; };
 		DD862F652649962600A316D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F642649962600A316D3 /* Constants.swift */; };
 		DD862F692649987100A316D3 /* LoginAndRegisterControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F682649987100A316D3 /* LoginAndRegisterControl.swift */; };
+		DD9D55A4264DAFC000F8939C /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D55A3264DAFC000F8939C /* Networking.swift */; };
+		DD9D55A8264DC98400F8939C /* JsonParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D55A7264DC98400F8939C /* JsonParse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		DD862F622649960E00A316D3 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		DD862F642649962600A316D3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD862F682649987100A316D3 /* LoginAndRegisterControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndRegisterControl.swift; sourceTree = "<group>"; };
+		DD9D55A3264DAFC000F8939C /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		DD9D55A7264DC98400F8939C /* JsonParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,12 +172,9 @@
 			children = (
 				DD862F622649960E00A316D3 /* Styling.swift */,
 				DD862F642649962600A316D3 /* Constants.swift */,
+				DD9D55A5264DC95500F8939C /* Model Classes */,
 				DD862F67264996E800A316D3 /* Control For Controllers */,
 				DD862F662649966000A316D3 /* API & Backend */,
-				74791367264CBFC9003D6E1A /* UserModel.swift */,
-				7479136C264CC0CB003D6E1A /* Post.swift */,
-				74791371264CC2E5003D6E1A /* CurrentUser.swift */,
-				74791376264CC7D2003D6E1A /* Register.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,6 +189,8 @@
 		DD862F662649966000A316D3 /* API & Backend */ = {
 			isa = PBXGroup;
 			children = (
+				DD9D55A3264DAFC000F8939C /* Networking.swift */,
+				DD9D55A6264DC96A00F8939C /* Json Parse */,
 			);
 			path = "API & Backend";
 			sourceTree = "<group>";
@@ -198,6 +201,25 @@
 				DD862F682649987100A316D3 /* LoginAndRegisterControl.swift */,
 			);
 			path = "Control For Controllers";
+			sourceTree = "<group>";
+		};
+		DD9D55A5264DC95500F8939C /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				74791367264CBFC9003D6E1A /* UserModel.swift */,
+				7479136C264CC0CB003D6E1A /* Post.swift */,
+				74791371264CC2E5003D6E1A /* CurrentUser.swift */,
+				74791376264CC7D2003D6E1A /* Register.swift */,
+			);
+			path = "Model Classes";
+			sourceTree = "<group>";
+		};
+		DD9D55A6264DC96A00F8939C /* Json Parse */ = {
+			isa = PBXGroup;
+			children = (
+				DD9D55A7264DC98400F8939C /* JsonParse.swift */,
+			);
+			path = "Json Parse";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,8 +355,10 @@
 				74791372264CC2E5003D6E1A /* CurrentUser.swift in Sources */,
 				74791377264CC7D2003D6E1A /* Register.swift in Sources */,
 				DD862F632649960E00A316D3 /* Styling.swift in Sources */,
+				DD9D55A4264DAFC000F8939C /* Networking.swift in Sources */,
 				DD862F302649953500A316D3 /* LoginViewController.swift in Sources */,
 				74791368264CBFC9003D6E1A /* UserModel.swift in Sources */,
+				DD9D55A8264DC98400F8939C /* JsonParse.swift in Sources */,
 				DD862F2C2649953500A316D3 /* AppDelegate.swift in Sources */,
 				DD862F362649953500A316D3 /* Fresh.xcdatamodeld in Sources */,
 				DD862F2E2649953500A316D3 /* SceneDelegate.swift in Sources */,
