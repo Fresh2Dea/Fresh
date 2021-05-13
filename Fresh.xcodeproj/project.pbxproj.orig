@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		74791368264CBFC9003D6E1A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74791367264CBFC9003D6E1A /* UserModel.swift */; };
 		7479136D264CC0CB003D6E1A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479136C264CC0CB003D6E1A /* Post.swift */; };
 		74791372264CC2E5003D6E1A /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74791371264CC2E5003D6E1A /* CurrentUser.swift */; };
 		74791377264CC7D2003D6E1A /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74791376264CC7D2003D6E1A /* Register.swift */; };
+=======
+>>>>>>> a5492af5746a33b2e918558ec42f44ad6d727129
 		DD862F2C2649953500A316D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2B2649953500A316D3 /* AppDelegate.swift */; };
 		DD862F2E2649953500A316D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2D2649953500A316D3 /* SceneDelegate.swift */; };
 		DD862F302649953500A316D3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2F2649953500A316D3 /* LoginViewController.swift */; };
@@ -43,10 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		74791367264CBFC9003D6E1A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		7479136C264CC0CB003D6E1A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		74791371264CC2E5003D6E1A /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		74791376264CC7D2003D6E1A /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> a5492af5746a33b2e918558ec42f44ad6d727129
 		DD862F282649953500A316D3 /* Fresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD862F2B2649953500A316D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD862F2D2649953500A316D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,10 +176,13 @@
 				DD862F642649962600A316D3 /* Constants.swift */,
 				DD862F67264996E800A316D3 /* Control For Controllers */,
 				DD862F662649966000A316D3 /* API & Backend */,
+<<<<<<< HEAD
 				74791367264CBFC9003D6E1A /* UserModel.swift */,
 				7479136C264CC0CB003D6E1A /* Post.swift */,
 				74791371264CC2E5003D6E1A /* CurrentUser.swift */,
 				74791376264CC7D2003D6E1A /* Register.swift */,
+=======
+>>>>>>> a5492af5746a33b2e918558ec42f44ad6d727129
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -330,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				74791372264CC2E5003D6E1A /* CurrentUser.swift in Sources */,
 				74791377264CC7D2003D6E1A /* Register.swift in Sources */,
 				DD862F632649960E00A316D3 /* Styling.swift in Sources */,
@@ -339,6 +349,13 @@
 				DD862F362649953500A316D3 /* Fresh.xcdatamodeld in Sources */,
 				DD862F2E2649953500A316D3 /* SceneDelegate.swift in Sources */,
 				7479136D264CC0CB003D6E1A /* Post.swift in Sources */,
+=======
+				DD862F632649960E00A316D3 /* Styling.swift in Sources */,
+				DD862F302649953500A316D3 /* LoginViewController.swift in Sources */,
+				DD862F2C2649953500A316D3 /* AppDelegate.swift in Sources */,
+				DD862F362649953500A316D3 /* Fresh.xcdatamodeld in Sources */,
+				DD862F2E2649953500A316D3 /* SceneDelegate.swift in Sources */,
+>>>>>>> a5492af5746a33b2e918558ec42f44ad6d727129
 				DD862F692649987100A316D3 /* LoginAndRegisterControl.swift in Sources */,
 				DD862F652649962600A316D3 /* Constants.swift in Sources */,
 			);
