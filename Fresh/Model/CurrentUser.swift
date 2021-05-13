@@ -10,7 +10,13 @@ class CurrentUser:User{
     let accessToken:String
     var followers:Array<User>
     var following:Array<User>
-    init(){
+    
+    
+    init(userId: Int, userName: String, Posts: [Post], accessToken: String, followers: [User], following: [User]){
+        self.accessToken = accessToken
+        self.followers = followers
+        self.following = following
+        super.init(id: userId, username: userName, posts: Posts)
         
     }
     

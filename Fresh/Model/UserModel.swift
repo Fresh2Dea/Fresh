@@ -11,8 +11,10 @@ public class User{
     let username:String
     let posts:Array<Post>
     
-    init(id:Int,username:String,posts:Array<Post>) {
-        <#statements#>
+    init(id:Int ,username:String , posts:Array<Post>) {
+        self.id = id
+        self.username = username
+        self.posts = posts
     }
     
     func getUsername()->String{
