@@ -12,13 +12,18 @@ class LoginViewController: UIViewController {
     let networking = Networking()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         networking.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        networking.attemptLogin(email: "sandiraramdat127@gmail.com", Password: "howAboutNow17!")
+        let register=Register(email: "sandiraramdat127@gmail.com",username: "richard", password: "howAboutNow17!",confirmPassword:"howAboutNow17!")
+        do{
+            try register.create()
+        }catch{
+            print(error)
+        }
+        //networking.attemptLogin(email: "sandiraramdat127@gmail.com", Password: "howAboutNow17!")
     }
 
 
@@ -27,6 +32,9 @@ class LoginViewController: UIViewController {
 extension LoginViewController: networkingProtocol {
     func registerSuccess() {
         print("Register Success")
+    }
+    
+    func registerSuccess2() {
     }
     
     func error(message: String) {
@@ -41,4 +49,3 @@ extension LoginViewController: networkingProtocol {
     
 
 }
-

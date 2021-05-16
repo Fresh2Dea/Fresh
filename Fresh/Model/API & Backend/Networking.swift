@@ -10,6 +10,7 @@ import UIKit
 protocol networkingProtocol {
     func loginSuccess(user: CurrentUser)
     func registerSuccess()
+    func registerSuccess2()
     func error (message: String)
 }
 
@@ -117,7 +118,6 @@ class Networking {
             if let e = Error {
                 self.delegate?.error(message: e.localizedDescription)
             }
-            
             //If no error parse returned data and create new Current user to be returned
             else {
                 let statusCode = Response as! HTTPURLResponse
