@@ -12,15 +12,14 @@ enum RequestError: Error {
     case JSONError(String)
 }
 
-struct SerializaedResponse{
-    let statusCode:Int
-    let body:JSONSerialization
+protocol requestProtocol {
+    func onSuccess(status:Int,data:Data,response:URLResponse)
+    func onError(error:Error)
 }
-
 
 class Request{
     let url:String
-    var delegate: networkingProtocol?
+    var delegate: requestProtocol?
     init(url:String){
         self.url=url
     }
@@ -36,6 +35,7 @@ class Request{
         }
     }
     
+    
     func requestWithBody(requestMethod:String,endpoint:String,body:[String: Any],headers:[String: String]) throws {
         let url = URL(string: self.url + endpoint)
         var request = URLRequest(url: url!)
@@ -48,14 +48,17 @@ class Request{
             }
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: request){ Data, Response, Error in
-                print("'here'")
-                self.delegate?.registerSuccess()
-            
+                
+                if let e = Error {
+                    self.delegate?.onError(error: e)
+                }else {
+                    let statusCode = Response as! HTTPURLResponse
+                    self.delegate?.onSuccess(status:statusCode.statusCode,data:Data!,response:Response!)
+                }
             }
             
             task.resume()
-        }
-        catch{
+        }catch{
             
         }
     }

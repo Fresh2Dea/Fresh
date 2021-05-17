@@ -32,22 +32,30 @@ enum RegisterAPIError: Error{
     case UnexpectedError(String)
 }
 
-protocol RegisterAPIProtocol {
-    func registerSuccess2()
-    func error2(message: String)
+struct RegisterErrorResponse:Decodable{
+    let email:Array<String>?
 }
 
+struct RegisterSuccessResponse:Decodable{
+    let success:String?
+}
+
+protocol UIUpdate{
+    func updateUI(msg:String)
+}
 class Register{
     let email:String
     let username:String
     let password:String
     let confirmPassword:String
     let request=Request(url:"https://fresh2death.herokuapp.com")
+    var delegate:UIUpdate?
     init(email:String,username:String,password:String,confirmPassword:String) {
         self.email=email
         self.username=username
         self.password=password
         self.confirmPassword=confirmPassword
+        request.delegate=self
     }
     
     func validateWithRegex(value:String,regex:String)->Bool{
@@ -98,5 +106,29 @@ class Register{
         }catch {
             
         }
+    }
+}
+
+extension Register:requestProtocol{
+    func onSuccess(status:Int,data:Data,response:URLResponse){
+        //successfully received a response from the server
+        //handle the response
+        let decoder = JSONDecoder()
+        switch status {
+            case 200...299:
+                print("Register Successful")
+                let success: RegisterSuccessResponse=try! decoder.decode(RegisterSuccessResponse.self, from: data)
+                print(success)
+            case 400...499:
+                print("Register Error")
+                let error: RegisterErrorResponse = try! decoder.decode(RegisterErrorResponse.self, from: data)
+                self.delegate?.updateUI(msg: "someError")
+                print(error)
+            default:
+                print("Server Down")
+        }
+    }
+    func onError(error:Error){
+        print("Error Happened")
     }
 }

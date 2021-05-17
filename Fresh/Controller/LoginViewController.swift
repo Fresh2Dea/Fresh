@@ -46,6 +46,10 @@ extension LoginViewController: networkingProtocol {
         print(user.username)
         print(user.id)
     }
-    
+}
 
+extension LoginViewController:UIUpdate{
+    func updateUI(msg: String){
+        print(msg)
+    }
 }
