@@ -85,7 +85,7 @@ class MyAlert {
         
         //Create message label
         //Create label titleLable to be added to alertView
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 20,
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 30,
                                                width: alert.frame.size.width,
                                                height: 70))
         messageLabel.text = message
