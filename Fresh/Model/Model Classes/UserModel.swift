@@ -9,12 +9,10 @@ import Foundation
 public class User{
     let id:Int
     let username:String
-    let posts:Array<Post>
     
-    init(id:Int ,username:String , posts:Array<Post>) {
+    init(id:Int ,username:String) {
         self.id = id
         self.username = username
-        self.posts = posts
     }
     
     func getUsername()->String{
@@ -24,9 +22,9 @@ public class User{
     func getId()->Int{
         return self.id
     }
-    
+    /*
     func getPosts()->Array<Post>{
-        return self.posts
+        return
     }
-    
+    */
 }

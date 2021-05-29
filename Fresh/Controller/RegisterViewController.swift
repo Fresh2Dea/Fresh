@@ -1,38 +1,39 @@
 //
-//  ViewController.swift
+//  RegisterViewController.swift
 //  Fresh
 //
-//  Created by Richard Basdeo on 5/10/21.
+//  Created by deion bacchus on 5/28/21.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
+class RegisterViewController:UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let auth=Login()
-        auth.delegate=self
+        let register=Register(email: "sandiraramdat127@gmail.com",username: "richard", password: "howAboutNow17!",confirmPassword:"howAboutNow17!")
+        register.delegate=self
         do{
-            try auth.authenticate(email:"sandiraramdat127@gmail.com",password: "howAboutNow18!")
+            try register.create()
         }catch ValidationError.EmailError(let errorMessage){
             print(errorMessage)
         }catch ValidationError.PasswordError(let errorMessage){
             print(errorMessage)
+        }catch ValidationError.UsernameError(let errorMessage){
+            print(errorMessage)
         }catch{
-            
         }
     }
+
 }
 
-extension LoginViewController:LoginUIUpdate{
-    
-    func successfullyAuthenticated(userCredentials: LoginSuccessResponse){
-        
+extension RegisterViewController:RegisterUIUpdate{
+    func successfullyRegistered(msg: String){
+        print(msg)
     }
     func informUserErrorOccurred(errors:Array<ValidationResult>){
         DispatchQueue.main.async {

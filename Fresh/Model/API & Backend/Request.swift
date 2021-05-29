@@ -13,7 +13,7 @@ enum RequestError: Error {
 }
 
 protocol requestProtocol {
-    func onSuccess(status:Int,data:Data,response:URLResponse)
+    func onSuccess(status:Int,data:Data,response:URLResponse,requestMethod:String,endpoint:String)
     func onError(error:Error)
 }
 
@@ -36,7 +36,7 @@ class Request{
     }
     
     
-    func requestWithBody(requestMethod:String,endpoint:String,body:[String: Any],headers:[String: String]) throws {
+    func requestWithBody(requestMethod:String,endpoint:String,body:[String: Any],headers:[String: String]){
         let url = URL(string: self.url + endpoint)
         var request = URLRequest(url: url!)
         do{
@@ -53,7 +53,7 @@ class Request{
                     self.delegate?.onError(error: e)
                 }else {
                     let statusCode = Response as! HTTPURLResponse
-                    self.delegate?.onSuccess(status:statusCode.statusCode,data:Data!,response:Response!)
+                    self.delegate?.onSuccess(status:statusCode.statusCode,data:Data!,response:Response!,requestMethod:requestMethod,endpoint:endpoint)
                 }
             }
             
@@ -63,7 +63,7 @@ class Request{
         }
     }
     
-    func post(endpoint:String,body:[String: Any],headers:[String: String])throws{
-        return try requestWithBody(requestMethod: "POST", endpoint: endpoint, body: body, headers: headers)
+    func post(endpoint:String,body:[String: Any],headers:[String: String]){
+        return requestWithBody(requestMethod: "POST", endpoint: endpoint, body: body, headers: headers)
     }
 }

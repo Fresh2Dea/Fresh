@@ -138,7 +138,7 @@ class MyAlert {
                     //Get rid of alert
                     self.alert.frame = CGRect(x: targetView.frame.size.width/4,
                                               y: targetView.frame.size.height,
-                                              width: targetView.frame.size.width / 4,
+                                              width: targetView.frame.size.width/2,
                                               height: 100)
                     
                     //Get rid of blur

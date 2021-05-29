@@ -7,49 +7,33 @@
 
 import Foundation
 
-struct ValidationResult{
-    var valid:Bool;
-    var error:String;
-    var type:String
-    init(valid:Bool,type:String,error:String){
-        self.valid=valid
-        self.type=type
-        self.error=error
-    }
-}
-
-enum ValidationError: Error {
-    case EmailError(String)
-    case PasswordError(String)
-    case UsernameError(String)
-    case UnknowError(String)
-}
-
-enum RegisterAPIError: Error{
-    case WeakPasswordError(String)
-    case UniqueUsername(String)
-    case EmailExists(String)
-    case UnexpectedError(String)
-}
-
+//the object structure for an 400 error
 struct RegisterErrorResponse:Decodable{
     let email:Array<String>?
+    let username:Array<String>?
+    let password:Array<String>?
 }
 
+
+//the object structure of a successful repsonse
 struct RegisterSuccessResponse:Decodable{
     let success:String?
 }
 
-protocol UIUpdate{
-    func updateUI(msg:String)
+//registerviewcontroller delegates
+protocol RegisterUIUpdate{
+    func successfullyRegistered(msg:String)
+    func informUserErrorOccurred(errors:Array<ValidationResult>)
 }
+
 class Register{
     let email:String
     let username:String
     let password:String
     let confirmPassword:String
     let request=Request(url:"https://fresh2death.herokuapp.com")
-    var delegate:UIUpdate?
+    let validate=Validator()
+    var delegate:RegisterUIUpdate?
     init(email:String,username:String,password:String,confirmPassword:String) {
         self.email=email
         self.username=username
@@ -58,31 +42,10 @@ class Register{
         request.delegate=self
     }
     
-    func validateWithRegex(value:String,regex:String)->Bool{
-        let valuePred = NSPredicate(format:"SELF MATCHES %@", regex)
-        return valuePred.evaluate(with: value)
-    }
-    
-    func isValidEmail(_ email: String) -> ValidationResult {
-        let status=validateWithRegex(value: email, regex: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-        let error:String = (status == false ? "Enter A Valid Email" : "")
-        return ValidationResult(valid:status,type:"email",error:error)
-    }
-    
-    func passwordMatches()->ValidationResult{
-        let status=self.password==self.confirmPassword
-        let error:String = (status == false ? "Passwords Do Not Match" : "")
-        return ValidationResult(valid:status,type:"password",error:error)
-    }
-    
-    func isValidUsername(_ username:String)->ValidationResult{
-        let status=validateWithRegex(value: username, regex: "^[a-z0-9_.]*$")
-        let error:String = (status == false ? "Username Can Only Contain Characters a-z,0-9,_,." : "")
-        return ValidationResult(valid:status,type:"username",error:error)
-    }
-    
-    func validate() throws {
-        let results:Array<ValidationResult>=[isValidEmail(self.email),isValidUsername(self.username),passwordMatches()]
+    //validates all the fields required to register
+    func validateForm() throws {
+        //array of validation function calls
+        let results:Array<ValidationResult>=[self.validate.isValidEmail(self.email),self.validate.isValidUsername(self.username),self.validate.passwordMatches(password: self.password, confirmPassword: self.confirmPassword)]
         for result in results{
             if(result.valid==false){
                 switch result.type{
@@ -99,36 +62,71 @@ class Register{
         }
     }
     
-    func create() throws{
-        do{
-            try validate()
-            try request.post(endpoint: "/register", body: ["email" : self.email,"username": self.username,"password":self.password], headers: ["Content-Type":"application/json","Accept":"application/json"])
-        }catch {
-            
+    //translates api response to a response the user can more easily understand
+    func translateErrorMessage(error:RegisterErrorResponse)->Array<ValidationResult>{
+        var result:Array<ValidationResult>=[]
+        if((error.email) != nil){
+            for e in error.email!{
+                switch e {
+                case "This field must be unique.":
+                    result.append(ValidationResult(valid:false,type: "email",error:"Email Belongs To Another Account"))
+                    break;
+                default:
+                    break;
+                }
+            }
         }
+        if((error.username) != nil){
+            for e in error.username!{
+                switch e {
+                case "This field must be unique.":
+                    result.append(ValidationResult(valid:false,type: "username",error:"Username Already Taken"))
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        if((error.password) != nil){
+            for e in error.password!{
+                switch e {
+                case "This password is too common.":
+                    result.append(ValidationResult(valid:false,type: "password",error:"Password Is Too Weak"))
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        return result
+    }
+    
+    // validate the data and make an api request to register user
+    func create() throws{
+            try validateForm()
+            request.post(endpoint: "/register", body: ["email" : self.email,"username": self.username,"password":self.password], headers: ["Content-Type":"application/json","Accept":"application/json"])
     }
 }
 
 extension Register:requestProtocol{
-    func onSuccess(status:Int,data:Data,response:URLResponse){
+    func onSuccess(status:Int,data:Data,response:URLResponse,requestMethod:String,endpoint:String){
         //successfully received a response from the server
         //handle the response
         let decoder = JSONDecoder()
         switch status {
             case 200...299:
-                print("Register Successful")
-                let success: RegisterSuccessResponse=try! decoder.decode(RegisterSuccessResponse.self, from: data)
-                print(success)
-            case 400...499:
-                print("Register Error")
+                self.delegate?.successfullyRegistered(msg: "Successfully Created Account")
+            case 400:
                 let error: RegisterErrorResponse = try! decoder.decode(RegisterErrorResponse.self, from: data)
-                self.delegate?.updateUI(msg: "someError")
+                self.delegate?.informUserErrorOccurred(errors: translateErrorMessage(error: error))
                 print(error)
+            case 402...409:
+                self.delegate?.informUserErrorOccurred(errors:validate.unknownError())
             default:
-                print("Server Down")
+                self.delegate?.informUserErrorOccurred(errors:validate.unknownError())
         }
     }
     func onError(error:Error){
-        print("Error Happened")
+        self.delegate?.informUserErrorOccurred(errors:validate.unknownError())
     }
 }
