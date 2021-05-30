@@ -66,4 +66,13 @@ class Request{
     func post(endpoint:String,body:[String: Any],headers:[String: String]){
         return requestWithBody(requestMethod: "POST", endpoint: endpoint, body: body, headers: headers)
     }
+    
+    func put(endpoint:String,body:[String: Any],headers:[String: String]){
+        return requestWithBody(requestMethod: "PUT", endpoint: endpoint, body: body, headers: headers)
+    }
+    
+    func delete(endpoint:String,body:[String: Any],headers:[String: String]){
+        return requestWithBody(requestMethod: "DELETE", endpoint: endpoint, body: body, headers: headers)
+    }
+    
 }

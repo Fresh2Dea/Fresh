@@ -40,11 +40,13 @@ class CurrentUser:User{
     
     func follow(user:User){
         let username:String=user.getUsername()
+        request.post(endpoint: "/follow", body: ["following_user":username], headers: ["Authorization":self.accessToken,"Content-Type":"application/json","Accept":"application/json"])
         
     }
     
     func unfollow(user:User){
         let username:String=user.getUsername()
+        request.delete(endpoint: "/unfollow", body: ["following_user":username], headers: ["Authorization":self.accessToken,"Content-Type":"application/json","Accept":"application/json"])
     }
     
 }

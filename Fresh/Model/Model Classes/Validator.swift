@@ -26,10 +26,7 @@ enum ValidationError: Error {
     case UnknowError(String)
 }
 
-class Validator{
-    init(){
-        
-    }
+struct Validator{
     
     func validateWithRegex(value:String,regex:String)->Bool{
         let valuePred = NSPredicate(format:"SELF MATCHES %@", regex)
