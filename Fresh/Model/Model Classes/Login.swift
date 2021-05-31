@@ -58,7 +58,7 @@ extension Login:requestProtocol{
             case 401:
                 self.delegate?.informUserErrorOccurred(errors:validate.unauthorizedError())
             default:
-                print("Server Down")
+                self.delegate?.informUserErrorOccurred(errors:validate.unknownError())
         }
     }
     func onError(error:Error){

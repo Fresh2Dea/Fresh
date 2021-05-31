@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
     
     //keeping track of if the button enabled or disabled
     var buttonEnabled:Bool=false;
+    //keeping track of if a request is occurring
+    var requestHappening:Bool=false;
     
     func enableButton(){
         signInButton.isEnabled=true
@@ -103,6 +105,7 @@ class LoginViewController: UIViewController {
     
     func attemptLogin(){
         do{
+            disableButton()
             try auth.authenticate(email:email,password: password)
         }catch{
             let toast=Toast()
@@ -120,13 +123,17 @@ extension LoginViewController:LoginUIUpdate{
     func informUserErrorOccurred(errors:Array<ValidationResult>){
         // display a toast informing the user of what error occurred
         DispatchQueue.main.async {
+            self.enableButton()
             for error in errors{
+                let toast=Toast()
                 //check the validator class to see all the different types of errors
-                if(error.type=="authorization"){
-                    print("condition entered")
-                    let toast=Toast()
-                    toast.showToast(message: "Incorrect Email/Password Combination", view: self)
+                switch error.type{
+                    case "authorization":
+                        toast.showToast(message: "Incorrect Email/Password Combination", view: self)
+                    default:
+                        toast.showToast(message: "Unknown Error Occured,Try Again", view: self)
                 }
+                
             }
         }
     }
