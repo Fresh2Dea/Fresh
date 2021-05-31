@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		741533D92664A16E00743077 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741533D82664A16E00743077 /* Toast.swift */; };
+		741D19C4266493E400C5B85E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2F2649953500A316D3 /* LoginViewController.swift */; };
 		74791368264CBFC9003D6E1A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74791367264CBFC9003D6E1A /* UserModel.swift */; };
 		7479136D264CC0CB003D6E1A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479136C264CC0CB003D6E1A /* Post.swift */; };
 		74791372264CC2E5003D6E1A /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74791371264CC2E5003D6E1A /* CurrentUser.swift */; };
@@ -20,7 +22,6 @@
 		DD1303FD265348A900D54DBC /* MyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1303FC265348A900D54DBC /* MyAlert.swift */; };
 		DD862F2C2649953500A316D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2B2649953500A316D3 /* AppDelegate.swift */; };
 		DD862F2E2649953500A316D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2D2649953500A316D3 /* SceneDelegate.swift */; };
-		DD862F302649953500A316D3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD862F2F2649953500A316D3 /* LoginViewController.swift */; };
 		DD862F332649953500A316D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD862F312649953500A316D3 /* Main.storyboard */; };
 		DD862F362649953500A316D3 /* Fresh.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD862F342649953500A316D3 /* Fresh.xcdatamodeld */; };
 		DD862F382649953500A316D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD862F372649953500A316D3 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		741533D82664A16E00743077 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		74791367264CBFC9003D6E1A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		7479136C264CC0CB003D6E1A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		74791371264CC2E5003D6E1A /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				DD862F392649953500A316D3 /* LaunchScreen.storyboard */,
 				DD1303FC265348A900D54DBC /* MyAlert.swift */,
 				74D6DB882663341300FC8C53 /* FormField.swift */,
+				741533D82664A16E00743077 /* Toast.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -342,10 +345,10 @@
 			files = (
 				74791372264CC2E5003D6E1A /* CurrentUser.swift in Sources */,
 				DD1303FD265348A900D54DBC /* MyAlert.swift in Sources */,
+				741533D92664A16E00743077 /* Toast.swift in Sources */,
 				74D6DB892663341300FC8C53 /* FormField.swift in Sources */,
 				74791377264CC7D2003D6E1A /* Register.swift in Sources */,
 				DD862F632649960E00A316D3 /* Styling.swift in Sources */,
-				DD862F302649953500A316D3 /* LoginViewController.swift in Sources */,
 				74791368264CBFC9003D6E1A /* UserModel.swift in Sources */,
 				748D8CDD2661F0F300AC969B /* RegisterViewController.swift in Sources */,
 				DD862F2C2649953500A316D3 /* AppDelegate.swift in Sources */,
@@ -353,6 +356,7 @@
 				DD862F362649953500A316D3 /* Fresh.xcdatamodeld in Sources */,
 				DD862F2E2649953500A316D3 /* SceneDelegate.swift in Sources */,
 				7479136D264CC0CB003D6E1A /* Post.swift in Sources */,
+				741D19C4266493E400C5B85E /* LoginViewController.swift in Sources */,
 				7479138226506296003D6E1A /* Request.swift in Sources */,
 				DD862F652649962600A316D3 /* Constants.swift in Sources */,
 				748D8CD9265F562C00AC969B /* Login.swift in Sources */,

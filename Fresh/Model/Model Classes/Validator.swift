@@ -45,7 +45,7 @@ struct Validator{
         return ValidationResult(valid:status,type:"password",error:error)
     }
     
-    func passwordValid(password:String)->ValidationResult{
+    func isValidPassword(password:String)->ValidationResult{
         var valid=false
         if(password.count>=6 && password.count<=100){
             valid=true

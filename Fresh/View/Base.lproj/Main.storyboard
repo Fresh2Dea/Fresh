@@ -24,27 +24,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="emailTextFieldAction:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="DYy-e8-MCC"/>
+                                    <action selector="emailBeingTyped:" destination="BYZ-38-t0r" eventType="editingChanged" id="LH9-58-a9d"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L1v-3t-g4p" userLabel="Password Text Field">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L1v-3t-g4p">
                                 <rect key="frame" x="20" y="255" width="374" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="jGA-Mo-SDM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="passwordBeingTyped:" destination="BYZ-38-t0r" eventType="editingChanged" id="M3Q-Ke-UWW"/>
+                                </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qb-On-v7W">
-                                <rect key="frame" x="20" y="430" width="374" height="40"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Jpm-rJ-jWm"/>
-                                </constraints>
-                                <state key="normal" title="Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPF-qV-tgO">
                                 <rect key="frame" x="20" y="220" width="374" height="15"/>
                                 <constraints>
@@ -54,6 +47,28 @@
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4m8-hm-x8m" userLabel="Password Helper Label">
+                                <rect key="frame" x="20" y="331" width="374" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="9hh-dX-sYk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qb-On-v7W">
+                                <rect key="frame" x="20" y="428" width="374" height="40"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Jpm-rJ-jWm"/>
+                                </constraints>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="26u-CB-efK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -63,9 +78,12 @@
                             <constraint firstItem="L1v-3t-g4p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="4tz-Af-Qbh"/>
                             <constraint firstItem="L1v-3t-g4p" firstAttribute="top" secondItem="m8X-YE-hLL" secondAttribute="bottom" constant="36" id="5A0-Cy-0Yb"/>
                             <constraint firstItem="8Qb-On-v7W" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8pv-tC-zIl"/>
-                            <constraint firstItem="8Qb-On-v7W" firstAttribute="top" secondItem="L1v-3t-g4p" secondAttribute="bottom" constant="100" id="FN3-JZ-czu"/>
+                            <constraint firstItem="4m8-hm-x8m" firstAttribute="top" secondItem="L1v-3t-g4p" secondAttribute="bottom" constant="1" id="AvG-XK-l8u"/>
+                            <constraint firstItem="4m8-hm-x8m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CFC-Mj-plg"/>
+                            <constraint firstItem="8Qb-On-v7W" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Rbg-bb-kBM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="m8X-YE-hLL" secondAttribute="trailing" constant="20" id="Svs-rb-5Mr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Qb-On-v7W" secondAttribute="trailing" constant="20" id="bD5-D4-Wx8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4m8-hm-x8m" secondAttribute="trailing" constant="20" id="dDf-x1-uHV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vPF-qV-tgO" secondAttribute="trailing" constant="20" id="i58-M1-n5B"/>
                             <constraint firstItem="vPF-qV-tgO" firstAttribute="top" secondItem="m8X-YE-hLL" secondAttribute="bottom" constant="1" id="iyE-Mo-LcH"/>
                             <constraint firstItem="vPF-qV-tgO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="qZY-jv-iNg"/>
@@ -76,7 +94,9 @@
                     <connections>
                         <outlet property="emailHelperLabel" destination="vPF-qV-tgO" id="02a-YH-hx6"/>
                         <outlet property="emailTextField" destination="m8X-YE-hLL" id="wPs-9R-zP0"/>
+                        <outlet property="passwordHelperLabel" destination="4m8-hm-x8m" id="v6J-z4-1XM"/>
                         <outlet property="passwordTextField" destination="L1v-3t-g4p" id="3uq-z4-bCw"/>
+                        <outlet property="signInButton" destination="8Qb-On-v7W" id="5kj-9v-kPD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
