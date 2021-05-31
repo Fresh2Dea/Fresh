@@ -30,24 +30,17 @@ class Login{
         request.delegate=self
     }
     
-    func validate(email:String,password:String)throws{
-        let results:Array<ValidationResult>=[self.validate.isValidEmail(email),self.validate.passwordValid(password: password)]
+    func validate(email:String,password:String)->Bool{
+        let results:Array<ValidationResult>=[self.validate.isValidEmail(email),self.validate.isValidPassword(password: password)]
         for result in results{
             if(result.valid==false){
-                switch result.type{
-                    case "email":
-                        throw ValidationError.EmailError(result.error)
-                    case "password":
-                        throw ValidationError.PasswordError(result.error)
-                    default:
-                        throw ValidationError.UnknowError("Unkown Error Occurred")
-                }
+               return false
             }
         }
+        return true
     }
     
     func authenticate(email:String,password:String) throws{
-            try self.validate(email: email, password: password)
             request.post(endpoint: "/login", body: ["email" : email,"password":password], headers: ["Content-Type":"application/json","Accept":"application/json"])
         
     }
@@ -69,6 +62,6 @@ extension Login:requestProtocol{
         }
     }
     func onError(error:Error){
-        print("Error Happened")
+        self.delegate?.informUserErrorOccurred(errors:validate.unknownError())
     }
 }

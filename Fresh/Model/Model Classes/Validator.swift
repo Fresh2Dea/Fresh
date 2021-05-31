@@ -26,10 +26,7 @@ enum ValidationError: Error {
     case UnknowError(String)
 }
 
-class Validator{
-    init(){
-        
-    }
+struct Validator{
     
     func validateWithRegex(value:String,regex:String)->Bool{
         let valuePred = NSPredicate(format:"SELF MATCHES %@", regex)
@@ -48,7 +45,7 @@ class Validator{
         return ValidationResult(valid:status,type:"password",error:error)
     }
     
-    func passwordValid(password:String)->ValidationResult{
+    func isValidPassword(password:String)->ValidationResult{
         var valid=false
         if(password.count>=6 && password.count<=100){
             valid=true

@@ -8,23 +8,105 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailHelperLabel: UILabel!
+    @IBOutlet weak var passwordHelperLabel: UILabel!
+    @IBOutlet weak var signInButton: UIButton!
+    
+    let validator=Validator()
+    let auth=Login()
+    
+    var email:String="";
+    var password:String="";
+    
+    //keeping track of if the button enabled or disabled
+    var buttonEnabled:Bool=false;
+    
+    func enableButton(){
+        signInButton.isEnabled=true
+        signInButton.backgroundColor = UIColor.black.withAlphaComponent(1.0)
+        buttonEnabled=true
+    }
+    
+    func disableButton(){
+        signInButton.isEnabled=false
+        signInButton.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        buttonEnabled=false
+    }
+    
+    //checks if both fields are valid, if valid enable the auth button
+    func checkFormComplete(){
+        let result=auth.validate(email: self.email, password: self.password)
+        if(result==true){
+            enableButton()
+        }
+    }
+    
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
+        attemptLogin()
+    }
 
+    @IBAction func emailBeingTyped(_ sender: UITextField) {
+        let valid=validator.isValidEmail(sender.text ?? "")
+        if(valid.valid==false){
+            emailHelperLabel.text="Please Check That Your Email Is Correct"
+            if(buttonEnabled){
+                disableButton()
+            }
+        }else{
+            //remove helper text,assign current string to email and check if form complete
+            emailHelperLabel.text=""
+            self.email=sender.text ?? ""
+            checkFormComplete()
+        }
+    }
+
+    @IBAction func passwordBeingTyped(_ sender: UITextField) {
+        let valid=validator.isValidPassword(password:sender.text ?? "")
+        if(valid.valid==false){
+            passwordHelperLabel.text="Minimum Of 6 Characters"
+            if(buttonEnabled){
+                disableButton()
+            }
+        }else{
+            //remove helper text,assign current string to password and check if form complete
+            passwordHelperLabel.text=""
+            self.password=sender.text ?? ""
+            checkFormComplete()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        auth.delegate=self
+    }
+    
+    func alertComplete(){
+        print("alert complete")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        emailHelperLabel.font = emailHelperLabel.font.withSize(14)
+        passwordHelperLabel.font = passwordHelperLabel.font.withSize(14)
+        passwordTextField.isSecureTextEntry = true
+        disableButton()
+        FormField(textField: emailTextField)
+        FormField(textField: passwordTextField)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let auth=Login()
-        auth.delegate=self
+        
+    }
+    
+    func attemptLogin(){
         do{
-            try auth.authenticate(email:"sandiraramdat127@gmail.com",password: "howAboutNow18!")
-        }catch ValidationError.EmailError(let errorMessage){
-            print(errorMessage)
-        }catch ValidationError.PasswordError(let errorMessage){
-            print(errorMessage)
+            try auth.authenticate(email:email,password: password)
         }catch{
-            
+            let toast=Toast()
+            toast.showToast(message: "Unexpected Error", view: self)
         }
     }
 }
@@ -32,11 +114,20 @@ class LoginViewController: UIViewController {
 extension LoginViewController:LoginUIUpdate{
     
     func successfullyAuthenticated(userCredentials: LoginSuccessResponse){
-        
+        //create a user object and pass it to the feedviewcontroller
+        print(userCredentials)
     }
     func informUserErrorOccurred(errors:Array<ValidationResult>){
+        // display a toast informing the user of what error occurred
         DispatchQueue.main.async {
-            
+            for error in errors{
+                //check the validator class to see all the different types of errors
+                if(error.type=="authorization"){
+                    print("condition entered")
+                    let toast=Toast()
+                    toast.showToast(message: "Incorrect Email/Password Combination", view: self)
+                }
+            }
         }
     }
 }
