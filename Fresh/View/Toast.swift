@@ -10,8 +10,14 @@ import UIKit
 
 struct Toast{
     func showToast(message : String,view: UIViewController) {
-        let width=view.view.frame.size.width-(2*(view.view.frame.size.width/4 - 75))
-        let toastLabel = UILabel(frame: CGRect(x: view.view.frame.size.width/4 - 75, y: view.view.frame.size.height-100, width: width, height: 50))
+        let width = view.view.frame.size.width-(2*(view.view.frame.size.width/4 - 75))
+        
+        //First need toast off the sceen so y is + 100
+        let toastLabel = UILabel(frame: CGRect(x: view.view.frame.size.width/4 - 75,
+                                               y: view.view.frame.size.height + 100,
+                                               width: width,
+                                               height: 50))
+        
         toastLabel.backgroundColor = UIColor.black
         toastLabel.textColor = UIColor.white
         toastLabel.textAlignment = .center;
@@ -21,12 +27,25 @@ struct Toast{
         toastLabel.layer.cornerRadius = 3;
         toastLabel.clipsToBounds  =  true
         view.view.addSubview(toastLabel)
-        /*
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-                toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
+        //Now need animation to appear on screen so - 100 in y
+        UIView.animate(withDuration: 1.0) {
+            toastLabel.frame = CGRect(x: view.view.frame.size.width/4 - 75,
+                                      y: view.view.frame.size.height-100,
+                                      width: width,
+                                      height: 50)
+        } completion: { _ in
+            
+            //Now get rid of the animations from the screen and remove it from the view
+            UIView.animate(withDuration: 0.5,
+                           delay: 1,
+                           options: .curveLinear) {
+                toastLabel.frame = CGRect(x: view.view.frame.size.width/4 - 75,
+                                          y: view.view.frame.size.height + 100,
+                                          width: width,
+                                          height: 50)
+            } completion: { _ in
                 toastLabel.removeFromSuperview()
-        })
- */
+            }
+        }
     }
 }
