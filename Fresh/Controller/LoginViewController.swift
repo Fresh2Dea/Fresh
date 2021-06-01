@@ -23,8 +23,7 @@ class LoginViewController: UIViewController {
     
     //keeping track of if the button enabled or disabled
     var buttonEnabled:Bool=false;
-    //keeping track of if a request is occurring
-    var requestHappening:Bool=false;
+
     
     func enableButton(){
         signInButton.isEnabled=true
@@ -52,6 +51,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func emailBeingTyped(_ sender: UITextField) {
         let valid=validator.isValidEmail(sender.text ?? "")
+        self.email=sender.text ?? ""
         if(valid.valid==false){
             emailHelperLabel.text="Please Check That Your Email Is Correct"
             if(buttonEnabled){
@@ -60,13 +60,13 @@ class LoginViewController: UIViewController {
         }else{
             //remove helper text,assign current string to email and check if form complete
             emailHelperLabel.text=""
-            self.email=sender.text ?? ""
             checkFormComplete()
         }
     }
 
     @IBAction func passwordBeingTyped(_ sender: UITextField) {
         let valid=validator.isValidPassword(password:sender.text ?? "")
+        self.password=sender.text ?? ""
         if(valid.valid==false){
             passwordHelperLabel.text="Minimum Of 6 Characters"
             if(buttonEnabled){
@@ -75,7 +75,6 @@ class LoginViewController: UIViewController {
         }else{
             //remove helper text,assign current string to password and check if form complete
             passwordHelperLabel.text=""
-            self.password=sender.text ?? ""
             checkFormComplete()
         }
     }
@@ -85,15 +84,14 @@ class LoginViewController: UIViewController {
         auth.delegate=self
     }
     
-    func alertComplete(){
-        print("alert complete")
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         emailHelperLabel.font = emailHelperLabel.font.withSize(14)
         passwordHelperLabel.font = passwordHelperLabel.font.withSize(14)
         passwordTextField.isSecureTextEntry = true
+        signInButton.layer.cornerRadius = 3
         disableButton()
+        let toast=Toast()
+        toast.showToast(message: "Invalid Email/Password Combination", view: self)
         FormField(textField: emailTextField)
         FormField(textField: passwordTextField)
     }
@@ -120,6 +118,7 @@ extension LoginViewController:LoginUIUpdate{
         //create a user object and pass it to the feedviewcontroller
         print(userCredentials)
     }
+    
     func informUserErrorOccurred(errors:Array<ValidationResult>){
         // display a toast informing the user of what error occurred
         DispatchQueue.main.async {
@@ -129,11 +128,10 @@ extension LoginViewController:LoginUIUpdate{
                 //check the validator class to see all the different types of errors
                 switch error.type{
                     case "authorization":
-                        toast.showToast(message: "Incorrect Email/Password Combination", view: self)
+                        toast.showToast(message: "Invalid Email/Password Combination", view: self)
                     default:
                         toast.showToast(message: "Unknown Error Occured,Try Again", view: self)
                 }
-                
             }
         }
     }
