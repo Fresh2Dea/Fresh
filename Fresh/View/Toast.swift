@@ -36,8 +36,14 @@ struct Toast{
         } completion: { _ in
             
             //Now get rid of the animations from the screen and remove it from the view
+            UIView.animate(withDuration: 1.0) {
+                toastLabel.frame = CGRect(x: view.view.frame.size.width/4 - 75,
+                                          y: view.view.frame.size.height-100,
+                                          width: width,
+                                          height: 50)
+            }
             UIView.animate(withDuration: 0.5,
-                           delay: 1,
+                           delay: 4,
                            options: .curveLinear) {
                 toastLabel.frame = CGRect(x: view.view.frame.size.width/4 - 75,
                                           y: view.view.frame.size.height + 100,

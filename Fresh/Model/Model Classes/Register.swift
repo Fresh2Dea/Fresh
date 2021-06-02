@@ -43,23 +43,15 @@ class Register{
     }
     
     //validates all the fields required to register
-    func validateForm() throws {
+    func validateForm()->Bool {
         //array of validation function calls
         let results:Array<ValidationResult>=[self.validate.isValidEmail(self.email),self.validate.isValidUsername(self.username),self.validate.passwordMatches(password: self.password, confirmPassword: self.confirmPassword)]
-        for result in results{
-            if(result.valid==false){
-                switch result.type{
-                    case "email":
-                        throw ValidationError.EmailError(result.error)
-                    case "username":
-                        throw ValidationError.UsernameError(result.error)
-                    case "password":
-                        throw ValidationError.PasswordError(result.error)
-                    default:
-                        throw ValidationError.UnknowError("Unkown Error Occurred")
+            for result in results{
+                if(result.valid==false){
+                   return false
                 }
             }
-        }
+            return true
     }
     
     //translates api response to a response the user can more easily understand
@@ -102,8 +94,7 @@ class Register{
     }
     
     // validate the data and make an api request to register user
-    func create() throws{
-            try validateForm()
+    func create(){
             request.post(endpoint: "/register", body: ["email" : self.email,"username": self.username,"password":self.password], headers: ["Content-Type":"application/json","Accept":"application/json"])
     }
 }

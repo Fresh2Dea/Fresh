@@ -63,6 +63,26 @@ class Request{
         }
     }
     
+    func requestWithHeaders(requestMethod:String,endpoint:String,headers:[String: String]){
+        let url = URL(string: self.url + endpoint)
+        var request = URLRequest(url: url!)
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request){ Data, Response, Error in
+            
+            if let e = Error {
+                self.delegate?.onError(error: e)
+            }else {
+                let statusCode = Response as! HTTPURLResponse
+                self.delegate?.onSuccess(status:statusCode.statusCode,data:Data!,response:Response!,requestMethod:requestMethod,endpoint:endpoint)
+            }
+        }
+        
+        task.resume()
+    }
+    
     func post(endpoint:String,body:[String: Any],headers:[String: String]){
         return requestWithBody(requestMethod: "POST", endpoint: endpoint, body: body, headers: headers)
     }
@@ -74,5 +94,10 @@ class Request{
     func delete(endpoint:String,body:[String: Any],headers:[String: String]){
         return requestWithBody(requestMethod: "DELETE", endpoint: endpoint, body: body, headers: headers)
     }
+    
+    func get(endpoint:String,headers:[String: String]){
+        return requestWithHeaders(requestMethod: "GET", endpoint: endpoint,headers: headers)
+    }
+    
     
 }

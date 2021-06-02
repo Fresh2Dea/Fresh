@@ -15,18 +15,6 @@ class RegisterViewController:UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let register=Register(email: "sandiraramdat127@gmail.com",username: "richard", password: "howAboutNow17!",confirmPassword:"howAboutNow17!")
-        register.delegate=self
-        do{
-            try register.create()
-        }catch ValidationError.EmailError(let errorMessage){
-            print(errorMessage)
-        }catch ValidationError.PasswordError(let errorMessage){
-            print(errorMessage)
-        }catch ValidationError.UsernameError(let errorMessage){
-            print(errorMessage)
-        }catch{
-        }
     }
 
 }

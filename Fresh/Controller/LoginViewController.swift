@@ -90,8 +90,6 @@ class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         signInButton.layer.cornerRadius = 3
         disableButton()
-        let toast=Toast()
-        toast.showToast(message: "Invalid Email/Password Combination", view: self)
         FormField(textField: emailTextField)
         FormField(textField: passwordTextField)
     }
