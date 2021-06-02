@@ -70,13 +70,40 @@ extension RegisterViewController:RegisterUIUpdate{
 extension RegisterViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if (textField == emailTextField){
+        
+        switch textField {
+        case emailTextField:
             let valid = validator.isValidEmail(emailTextField.text ?? "")
-            if (valid.valid == false){
+            if valid.valid == false {
                 emailValidator.text = "Please Check That Your Email Is Correct"
             }
             else {
                 emailValidator.text = ""
+            }
+        case passwordTextField:
+            let valid = validator.isValidPassword(password: passwordTextField.text ?? "")
+            if valid.valid == false {
+                passwordValidator.text = "Minimum Of 6 Characters"
+            }
+            else {
+                passwordValidator.text = ""
+            }
+        case usernameTextField:
+            let valid = validator.isValidUsername(usernameTextField.text ?? "")
+            if valid.valid == false {
+                usernameValidator.text = "Can't Use this username."
+            }
+            else {
+                usernameValidator.text = ""
+            }
+        default:
+            let validate = validator.passwordMatches(password: passwordTextField.text ?? ""
+                                                     , confirmPassword: renterTextField.text ?? "")
+            if validate.valid == false {
+                renterValidator.text = "Passwords don't match."
+            }
+            else{
+                renterValidator.text = ""
             }
         }
     }
