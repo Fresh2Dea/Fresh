@@ -40,7 +40,7 @@ struct Validator{
     }
     
     func passwordMatches(password:String,confirmPassword:String)->ValidationResult{
-        let status=password==confirmPassword
+        let status=password==confirmPassword && (password.count != 0)==true
         let error:String = (status == false ? "Passwords Do Not Match" : "")
         return ValidationResult(valid:status,type:"password",error:error)
     }
@@ -55,7 +55,8 @@ struct Validator{
     }
     
     func isValidUsername(_ username:String)->ValidationResult{
-        let status=validateWithRegex(value: username, regex: "^[a-z0-9_.]*$")
+        let status=validateWithRegex(value: username, regex: "^[a-z0-9_.]*$") && (username.count >= 1)==true
+        print(status)
         let error:String = (status == false ? "Username Can Only Contain Characters a-z,0-9,_,." : "")
         return ValidationResult(valid:status,type:"username",error:error)
     }
