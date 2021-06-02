@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailHelperLabel: UILabel!
     @IBOutlet weak var passwordHelperLabel: UILabel!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var registerButtonOutlet: UIButton!
+    
     
     let validator=Validator()
     let auth=Login()
@@ -82,6 +84,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         auth.delegate=self
+        Styling.customButton(for: registerButtonOutlet)
     }
     
     override func viewDidAppear(_ animated: Bool) {
